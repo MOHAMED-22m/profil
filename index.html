@@ -1,49 +1,538 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="ltr"> <!-- تغيير dir من rtl إلى ltr -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="website_design.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Portfolio | محمد سليمان - أمن سيبراني</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --accent: #f59e0b;
+            --whatsapp: #25D366;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: #0f172a;
+            color: var(--light);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* الخلفية المتدرجة */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 30% 70%, rgba(245, 158, 11, 0.15) 0%, transparent 50%),
+                        linear-gradient(to bottom, #0f172a, #1e293b);
+            z-index: -1;
+        }
+        
+        /* تأثير الجسيمات المتحركة */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .logo i {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .navbar {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .navbar a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0; /* تغيير من right إلى left بسبب تغيير الاتجاه */
+            transition: width 0.3s;
+            border-radius: 3px;
+        }
+        
+        .navbar a:hover {
+            color: var(--accent);
+        }
+        
+        .navbar a:hover::after {
+            width: 100%;
+            right: 0;
+        }
+        
+        .home {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 80vh;
+            padding: 50px 0;
+            position: relative;
+        }
+        
+        .home_detial {
+            flex: 1;
+            max-width: 600px;
+            z-index: 10;
+            text-align: right; /* إضافة محاذاة النص لليمين */
+        }
+        
+        .home_detial h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--accent), var(--light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        
+        .home_detial h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-weight: 600;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .home_detial h2::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            bottom: -5px;
+            left: 0; /* تغيير من right إلى left بسبب تغيير الاتجاه */
+            border-radius: 3px;
+        }
+        
+        .home_detial p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #cbd5e1;
+        }
+        
+        .social {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: flex-end; /* محاذاة العناصر لليمين */
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+        }
+        
+        .btn i {
+            font-size: 1.2rem;
+        }
+        
+        .social_icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social_icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .social_icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: var(--primary);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.5);
+        }
+        
+        .social_icon.whatsapp:hover {
+            background: var(--whatsapp);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.5);
+        }
+        
+        .home_img {
+            flex: 1;
+            display: flex;
+            justify-content: flex-start; /* تغيير من center إلى flex-start لضمان بقاء الصورة على اليسار */
+            align-items: center;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .img_box {
+            width: 380px;
+            height: 380px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            overflow: hidden;
+            border: 10px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease-in-out;
+            animation: morph 8s ease-in-out infinite;
+            position: relative;
+        }
+        
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            50% { border-radius: 60% 40% 40% 60% / 60% 60% 40% 40%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+        
+        .img_box::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            z-index: -1;
+            border-radius: inherit;
+            animation: rotate 6s linear infinite;
+            opacity: 0.7;
+            filter: blur(20px);
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .img_box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .img_box:hover {
+            animation-play-state: paused;
+        }
+        
+        .img_box:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* زر الواتساب العائم */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px; /* تغيير من left إلى right بسبب تغيير الاتجاه */
+            width: 60px;
+            height: 60px;
+            background-color: var(--whatsapp);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            z-index: 100;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            animation: none;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        /* التصميم للجوال */
+        @media (max-width: 992px) {
+            .home {
+                flex-direction: column; /* تغيير من column-reverse إلى column */
+                text-align: center;
+                padding-top: 30px;
+            }
+            
+            .home_detial {
+                margin-top: 50px;
+                max-width: 100%;
+                text-align: center; /* محاذاة النص لمركز في الجوال */
+            }
+            
+            .home_detial h1 {
+                font-size: 2.5rem;
+            }
+            
+            .home_detial h2 {
+                font-size: 1.5rem;
+            }
+            
+            .social {
+                justify-content: center;
+            }
+            
+            .navbar {
+                gap: 15px;
+            }
+            
+            .home_img {
+                justify-content: center; /* محاذاة الصورة لمركز في الجوال */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .img_box {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px;
+                right: 20px; /* تغيير من left إلى right بسبب تغيير الاتجاه */
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- تأثير الجسيمات المتحركة -->
+    <div class="particles" id="particles"></div>
+    
     <div class="container">
         <header>
-            <a href="#" class="logo">Portfolio.</a>
+            <a href="#" class="logo animate__animated animate__fadeInDown">
+                <i class="fas fa-code"></i>
+                Portfolio.<span>محمد</span>
+            </a>
 
-            <nav class="navbar">
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Portfolio</a>
-                <a href="#">Services</a>
-                <a href="#">Contact</a>
+            <nav class="navbar animate__animated animate__fadeInDown">
+                <a href="#" class="animate__animated animate__fadeInDown" style="animation-delay: 0.1s">الرئيسية</a>
+                <a href="#" class="animate__animated animate__fadeInDown" style="animation-delay: 0.2s">عني</a>
+                <a href="#" class="animate__animated animate__fadeInDown" style="animation-delay: 0.3s">أعمالي</a>
+                <a href="#" class="animate__animated animate__fadeInDown" style="animation-delay: 0.4s">خدماتي</a>
+                <a href="#" class="animate__animated animate__fadeInDown" style="animation-delay: 0.5s">اتصل بي</a>
             </nav>
         </header>
-            <section class="home">
-                <div class="home_detial">
-                    <h1>#MÖ.ŚŮĻÏMÄŅ#</h1>
-                    <h2>
-                        cyber securitatis</h2>
-                    <p>Name: Mohammed This is my profile page. You can see all the details by downloading my CV.</p>
-                    <div class="social">
-                        <a href="#" class="btn">Download CV</a>
-                        <div class="social_icon">
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
-                            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="home_img">
-                    <div class="img_box">
-                        <img src="logo.jpg" alt="">
-                    </div>
-                </div>
-            </section>
         
+        <section class="home">
+            <div class="home_img animate__animated animate__fadeInLeft"> <!-- تغيير animate__fadeInRight إلى animate__fadeInLeft -->
+                <div class="img_box">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="صورة محمد سليمان">
+                </div>
+            </div>
+            
+            <div class="home_detial animate__animated animate__fadeInRight"> <!-- تغيير animate__fadeInLeft إلى animate__fadeInRight -->
+                <h1>#محمد_سليمان#</h1>
+                <h2 class="animate__animated animate__fadeInRight" style="animation-delay: 0.3s"> <!-- تعديل هنا أيضا -->
+                    خبير أمن سيبراني
+                </h2>
+                <p class="animate__animated animate__fadeInRight" style="animation-delay: 0.5s"> <!-- تعديل هنا أيضا -->
+                    أهلاً بك في موقعي الشخصي. أنا متخصص في الأمن السيبراني مع أكثر من 5 سنوات خبرة في حماية الأنظمة والشبكات. أقدم حلولاً أمنية متكاملة للشركات والأفراد.
+                </p>
+                
+                <div class="social">
+                    <a href="#" class="btn animate__animated animate__fadeInUp" style="animation-delay: 0.7s">
+                        <i class="fas fa-download"></i>
+                        تحميل السيرة الذاتية
+                    </a>
+                    <div class="social_icons">
+                        <a href="#" class="social_icon animate__animated animate__fadeInUp" style="animation-delay: 0.8s">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social_icon animate__animated animate__fadeInUp" style="animation-delay: 0.9s">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social_icon animate__animated animate__fadeInUp" style="animation-delay: 1s">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social_icon whatsapp animate__animated animate__fadeInUp" style="animation-delay: 1.1s">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+    
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/966501234567" class="whatsapp-float animate__animated animate__fadeInUp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // إنشاء جسيمات متحركة
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // تحديد حجم عشوائي بين 2px و 6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // تحديد موقع عشوائي
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                // تحديد مدة الحركة عشوائية
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // تأخير عشوائي
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                // شفافية عشوائية
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // تأثير التمرير السلس للروابط
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // تشغيل الجسيمات عند تحميل الصفحة
+        window.addEventListener('load', createParticles);
+    </script>
 </body>
-</html>
+    </html>
